@@ -1,0 +1,43 @@
+﻿@model IEnumerable<MyClass.Models.News>
+@{
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-blog set-bg" data-setbg="">
+	<div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <img src="~/Public/images/8.-4Men-Shop-Cần-Thơ-min-768x432.jpg" />
+            </div>
+            
+
+        </div>
+	</div>
+</section>
+<!-- Breadcrumb Section End -->
+<!-- Blog Section Begin -->
+<section class="blog spad">
+	<div class="container" style=" border: 1px solid; padding: 10px; box-shadow: 5px 5px 5px #808080;">
+		<div class="row">
+			@foreach (var news in Model)
+			{
+				<div class="col-lg-4 col-md-6 col-sm-6">
+					<div class="blog__item">
+						<div class="blog__item__pic set-bg" data-setbg="">
+							<img src="~/Public/images/blog/@news.Image"/>
+						</div>
+
+						<div class="blog__item__text">
+							<span><img src="img/icon/calendar.png" alt="">@news.CreatedAt</span>
+							<h5>@news.Name</h5>
+							<a href="@Url.Action("NDetail","Home", new { Id = news.Id })">Read More</a>
+						</div>
+					</div>
+				</div>
+			}
+			</div>
+	</div>
+</section>
+<!-- Blog Section End -->

@@ -1,0 +1,18 @@
+﻿@model IEnumerable<MyClass.Models.ProductCategory>
+<div class="card">
+	<div class="card-heading">
+		<a data-toggle="collapse" data-target="#collapseOne">DANH MỤC SẢN PHẨM</a>
+	</div>
+	<div id="collapseOne" class="collapse show" data-parent="#accordionExample">
+		<div class="card-body">
+			<div class="shop__sidebar__brand">
+				<ul>
+					@foreach (var newscate in Model)
+					{
+						<li><a href="@newscate.Slug">@newscate.Name</a></li>
+					}
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

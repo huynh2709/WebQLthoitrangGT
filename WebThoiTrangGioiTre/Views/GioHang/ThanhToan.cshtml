@@ -1,0 +1,175 @@
+﻿@model IEnumerable<CartItem>
+@{
+	ViewBag.Title = "Giỏ hàng của bạn";
+	Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+@{
+	var user = ViewBag.user;
+}
+
+@using (Html.BeginForm("DatHang", "GioHang", FormMethod.Post))
+{
+
+	<section class="breadcrumb-option">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="breadcrumb__text">
+						<h4>Thanh Toán</h4>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Shopping Cart Section Begin-->
+<section class="shopping-cart spad">
+	<div class="container">
+		<div class="row">
+			@foreach (CartItem item in Model)
+			{
+				<div class="col-lg-8">
+					<div class="shopping__cart__table">
+						<table>
+							<thead>
+								<tr>
+									<th>Product</th>
+									<th>Quantity</th>
+									<th>Total</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+
+								<tr>
+									<td class="product__cart__item">
+										<div class="product__cart__item__pic">
+											<img src="~/Public/images/products/@item.Hinh" width="100" height="100" alt="">
+										</div>
+										<div class="product__cart__item__text">
+											<h6> @item.TenSanPham</h6>
+											<strong class="text-dark">@item.Giam</strong>
+											<del><span class=" text-danger">  @item.Gia</span></del>
+										</div>
+									</td>
+									<td class="quantity__item" action="@Url.Action("SuaSoLuong")" method="get">
+										<div class="quantity">
+											<div class="pro-qty-2">
+												<form action="@Url.Action("SuaSoLuong")" method="get">
+													<input type="hidden" name="SanPhamID" value="@item.SanPhamID" />
+													<input type="number" min="1" step="1" name="soluongmoi" value="@item.SoLuong" />
+												</form>
+											</div>
+										</div>
+									</td>
+									<td class="cart__price"> @item.ThanhTien.ToString("#,##0").Replace(',', '.') VNĐ </td>
+
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+				</div>
+			}
+			<div class="col-lg-12">
+				<div class="cart__total">
+					<h6>TỔNG GIỎ HÀNG</h6>
+					<ul>
+						@{ int tongtien = 0;}
+						<li>PHỤ THU SHIP:  <span>25,000 VNĐ</span></li>
+						<li>TỔNG THANH TOÁN <span>@ViewBag.tongThanhToan VNĐ</span></li>
+					</ul>
+				</div>
+			</div>
+			<br />
+
+			<!--Thông tin đặt hàng-->
+
+			<main role="main">
+				<div class="container mt-4">
+					<form class="needs-validation" name="frmthanhtoan" method="post"
+						  action="#">
+						<input type="hidden" name="kh_tendangnhap" value="dnpcuong">
+
+						<div class="py-5 text-center">
+							<img src="~/Public/images/icon.png" width="50px" height="50px" />
+							<h2>Thanh toán</h2>
+							<p class="lead">Vui lòng kiểm tra thông tin Khách hàng, thông tin Giỏ hàng trước khi Đặt hàng.</p>
+						</div>
+
+						<div class="row">
+							<div class="col-md-8 order-md-1 centered">
+								<h4 class="mb-3">Thông tin khách hàng</h4>
+
+								<div class="row">
+									<div class="col-md-12">
+										<label for="kh_ten">Họ tên</label>
+										<input type="text" class="form-control" name="kh_ten" id="kh_ten"
+											   value="@user.FirstName" readonly="">
+									</div>
+
+									<div class="col-md-12">
+										<label for="kh_diachi">Địa chỉ giao hàng (Cần ghi rõ)</label>
+										<input type="text" class="form-control" name="kh_diachi" id="kh_diachi"
+											   value="@user.Address">
+									</div>
+									<div class="col-md-12">
+										<label for="kh_dienthoai">Điện thoại</label>
+										<input type="text" class="form-control" name="kh_dienthoai" id="kh_dienthoai"
+											   value="@user.Phone" readonly="">
+									</div>
+									<div class="col-md-12">
+										<label for="kh_email">Email</label>
+										<input type="text" class="form-control" name="kh_email" id="kh_email"
+											   value="@user.Email">
+									</div>
+									<div class="col-md-12">
+										<label for="kh_email">Note: Số cân nặng, màu sắc sản phẩm....</label>
+										<textarea type="text" class="form-control" name="kh_note" id="kh_note"
+												  value="@user.Note">
+												</textarea>
+									</div>
+								</div>
+
+								<h5 class="mb-3"><strong>Hình thức thanh toán</strong></h5>
+
+								<div class="d-block my-3">
+									<strong>- Nhận hàng trước khi thanh toán</strong>
+									<br />
+									<strong>-Chuyển khoản:</strong>
+									<br />
+									<strong>+Ngân hàng: Sacombank</strong>
+									<br />
+									<strong>+Số tài khoản: 07287642439 (TRAN THI THUY)</strong>
+									<br />
+									<strong>Chú ý:</strong><p>Khi chuyển khoản cần ghi rõ họ tên và nội dung chuyển. Mọi thắc mắc có thể liên hệ 098255454, BabyShop sẽ giải đáp mọi thắc mắc của bạn.Chân thành cảm ơn!</p>
+
+
+								</div>
+								<hr class="mb-4">
+
+							</div>
+						</div>
+					</form>
+				</div>
+			</main>
+
+			<button class="btn btn-outline-dark btn-block" type="submit">
+				Đặt hàng
+			</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-6 col-md-6 col-sm-6">
+			<div class="continue__btn">
+				<a href="~/tat-ca-san-pham">Tiếp tục mua sắm </a>
+			</div>
+		</div>
+		<div class="col-lg-6 col-md-6 col-sm-6">
+			<div class="continue__btn">
+				<a href="~/gio-hang">Về giỏ hàng </a>
+			</div>
+		</div>
+	</div>
+</section>
+}

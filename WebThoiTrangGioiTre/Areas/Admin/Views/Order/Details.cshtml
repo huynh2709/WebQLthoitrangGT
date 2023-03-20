@@ -1,0 +1,78 @@
+﻿@model MyClass.Models.Order
+
+@{
+	ViewBag.Title = "Details";
+	Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+	<section class="content my-2">
+		<div class="card">
+			<div class="card-header">
+				<div class="row">
+					<div class="col-md-6">
+						<strong class="text-danger">CHI TIẾT ĐƠN HÀNG</strong>
+					</div>
+					<div class="col-md-6 text-right">
+						<a href="@Url.Action("Index","Order")" class="btn btn-sm btn-outline-info"><i class="fas fa-long-arrow-alt-left"></i>  Về danh sách</a>
+					</div>
+				</div>
+			</div>
+			<div class="card-body ">
+
+				<table class="table table-bordered table-striped" id="datatablesSimple">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>
+								Tên sản phẩm
+							</th>
+							<th>
+								Giá
+							</th>
+							<th>
+								Số lượng
+							</th>
+							<th>
+								Thành tiền
+							</th>
+
+							<th>
+								@Html.DisplayNameFor(model => model.CreatedAt)
+							</th>
+
+
+							<th></th>
+						</tr>
+					</thead>
+					@{ int tongtien = 0;}
+					@foreach (var chitiet in ViewBag.ListChiTiet)
+					{
+						<tr>
+							<td>@chitiet.Id</td>
+							<td>@chitiet.NameProduct</td>
+							<td>@chitiet.Price</td>
+							<td>@chitiet.quantity</td>
+							<td>@chitiet.Amount</td>
+							<td>@chitiet.CreatedAt</td>
+						</tr>
+						tongtien += chitiet.Amount;
+					}
+
+				</table>
+
+			</div>
+			<b>Tổng Tiền: @tongtien.ToString("#,##0")</b>
+			<br />
+			<!--<div class="">
+		<a href="Url.Action("Huy","Order", new { id = Model.Id})" class="btn btn-outline-info">Hủy</a>
+		<a href="Url.Action("DaXacNhan","Order", new { id = Model.Id})" class="btn btn-outline-info">Đã xác nhận</a>
+		<a href="Url.Action("DangVanChuyen","Order", new { id = Model.Id})" class="btn btn-outline-info">Đang vận chuyển</a>
+		<a href="Url.Action("ThanhCong","Order", new { id = Model.Id})" class="btn btn-outline-info">Thành công</a>
+	</div>-->
+			<br />
+		</div>
+	</section>
+</div>
+

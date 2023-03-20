@@ -1,0 +1,170 @@
+﻿@model IEnumerable<MyClass.Models.Menu>
+@{
+	ViewBag.Title = "Quản lý menu";
+	Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@using (Html.BeginForm("Index", "Menu", FormMethod.Post))
+{
+
+	<!-- Content Wrapper. Contains page content -->
+	<div class="content-wrapper"  id="layoutSidenav_content">
+		<!-- Main content -->
+		<section class="content my-2">
+
+			<!-- Default box -->
+			<div class="card">
+				<div class="card-header">
+					<div class="row">
+						<div class="col-md-6">
+							<strong class="text-danger">QUẢN LÝ MENU</strong>
+						</div>
+						
+					</div>
+				</div>
+				<div class="card-body">
+					@Html.Partial("Message")
+					<div class="row">
+						<div class="col-md-3">
+							<div class="accordion" id="accordionExample">
+								<div class="card">
+									<div class="card-header" id="headingPosition">
+										<span>Vị trí</span>
+										<select name="Position" class="form-control">
+											<option value="mainmenu">MAIN MENU</option>
+											<option value="footermenu">FOOTER MENU</option>
+										</select>
+									</div>
+
+								</div>
+								<div class="card">
+									<div class="card-header" id="headingCategory">
+										<span>Danh mục sản phẩm</span>
+										<span class="float-right btn btn-sm btn-info" data-toggle="collapse" data-target="#collapseCategory" aria-expanded="true" aria-controls="collapseCategory">
+											<i class="fas fa-plus"></i>
+										</span>
+
+									</div>
+
+									<div id="collapseCategory" class="collapse p-2 m-2" aria-labelledby="headingCategory" data-parent="#accordionExample">
+										@foreach (var row in ViewBag.ListProductCategory)
+										{
+											<fieldset class="form-group">
+												<input name="itemcate" value="@row.Id" id="category_@row.Id" type="checkbox">
+												<label for="category_@row.Id">@row.Name</label>
+											</fieldset>
+										}
+										<fieldset class="form-group">
+											<input type="submit" name="ThemCategory" value="Thêm" class="btn btn-success form-control">
+										</fieldset>
+									</div>
+								</div>
+								<div class="card">
+									<div class="card-header" id="headingTopic">
+										<span>Danh mục bài viết</span>
+										<span class="float-right btn btn-sm btn-info" data-toggle="collapse" data-target="#collapseTopic" aria-expanded="true" aria-controls="collapseTopic">
+											<i class="fas fa-plus"></i>
+										</span>
+									</div>
+
+									<div id="collapseTopic" class="collapse p-2 m-2" aria-labelledby="headingTopic" data-parent="#accordionExample">
+										@foreach (var newscate in ViewBag.ListNewsCategory)
+										{
+											<fieldset class="form-group">
+												<input name="itemnewscate" value="@newscate.Id" id="newscate_@newscate.Id" type="checkbox">
+												<label for="newscate_@newscate.Id">@newscate.Name</label>
+											</fieldset>
+										}
+										<fieldset class="form-group">
+											<input type="submit" name="ThemNewsCategory" value="Thêm" class="btn btn-success form-control">
+										</fieldset>
+
+									</div>
+
+								</div>
+								<div class="card">
+									<div class="card-header" id="headingPage">
+										<span>Trang đơn</span>
+										<span class="float-right btn btn-sm btn-info" data-toggle="collapse" data-target="#collapsePage" aria-expanded="true" aria-controls="collapsePage">
+											<i class="fas fa-plus"></i>
+										</span>
+									</div>
+									<div id="collapsePage" class="collapse p-2 m-2" aria-labelledby="headingPage" data-parent="#accordionExample">
+										@foreach (var page in ViewBag.ListNews)
+										{
+											<fieldset class="form-group">
+												<input name="itempage" value="@page.Id" id="page_@page.Id" type="checkbox">
+												<label for="page_@page.Id">@page.Name</label>
+											</fieldset>
+										}
+										<fieldset class="form-group">
+											<input type="submit" name="ThemPage" value="Thêm" class="btn btn-success form-control">
+										</fieldset>
+
+									</div>
+								</div>
+								<div class="card">
+									<div class="card-header" id="headingCustom">
+										<span>Tùy Chỉnh</span>
+										<span class="float-right btn btn-sm btn-info" data-toggle="collapse" data-target="#collapseCustom" aria-expanded="true" aria-controls="collapseCustom">
+											<i class="fas fa-plus"></i>
+										</span>
+									</div>
+									<div id="collapseCustom" class="collapse p-2 m-2" aria-labelledby="headingCustom" data-parent="#accordionExample">
+										<fieldset class="form-group">
+											<label>Tên menu</label>
+											<input name="name" class="form-control" id="checkid" type="text">
+										</fieldset>
+										<fieldset class="form-group">
+											<label>Liên kết</label>
+											<input name="link" class="form-control" type="text">
+										</fieldset>
+										<fieldset class="form-group">
+											<input type="submit" name="ThemCustom" value="Thêm" class="btn btn-success form-control">
+										</fieldset>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-9">
+							<table class="table table-bordered" id="datatablesSimple">
+								<tr>
+									<th>ID</th>
+									<th>Tên menu</th>
+									<th>Kiểu menu</th>
+									<th>Link</th>
+									<th>Vị trí</th>
+									<th>Ngày tạo</th>
+									<th>Ngày cập nhật</th>
+									<th>Chức năng</th>
+								</tr>
+								@foreach (var items in Model)
+								{
+									<tr>
+										<td>@items.Id</td>
+										<td>@items.Name</td>
+										<td>@items.TypeMenu</td>
+										<td>@items.Link</td>
+										<td>@items.Position</td>
+										<td>@items.CreatedAt</td>
+										<td>@items.UpdatedAt</td>
+										<td class=" text-center">
+											<a href="@Url.Action("Details","Menu", new { id = items.Id })" class="btn btn-sm btn-primary"><i class="fas fa-eye"></i></a>
+											<a href="@Url.Action("Edit","Menu", new { id = items.Id })" class="btn btn-sm btn-info"><i class="fas fa-edit"></i></a>
+											<a href="@Url.Action("Delete","Menu", new { id = items.Id })" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+										</td>
+									</tr>
+
+								}
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.card -->
+
+		</section>
+		<!-- /.content -->
+	</div>
+	<!-- /.content-wrapper -->
+
+}

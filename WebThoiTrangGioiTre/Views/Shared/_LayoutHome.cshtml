@@ -1,0 +1,200 @@
+﻿
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="Male_Fashion Template">
+	<meta name="keywords" content="Male_Fashion, unica, creative, html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>@Page.Title</title>
+
+	<!-- Google Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
+		  rel="stylesheet">
+
+	<!-- Css Styles -->
+	<link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+	<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="/Public/css/font-awesome.min.css" type="text/css">
+	<link rel="stylesheet" href="/Public/css/elegant-icons.css" type="text/css">
+	<link rel="stylesheet" href="/Public/css/magnific-popup.css" type="text/css">
+	<link rel="stylesheet" href="/Public/css/nice-select.css" type="text/css">
+	<link rel="stylesheet" href="/Public/css/slicknav.min.css" type="text/css">
+	<link rel="stylesheet" href="/Public/css/style.css" type="text/css">
+	@RenderSection("header", required: false)
+</head>
+
+<body>
+	<!-- Header Section Begin -->
+	<header class="header">
+		<div class="header__top">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6 col-md-7">
+						<div class="header__top__left">
+							<marquee direction="right"><p>Free shipping, 30-day return or refund guarantee.</p></marquee>
+
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-5">
+						<div class="header__top__right">
+							<div class="header__top__links">
+								@if (Session["idUser"] == null)
+								{
+									<a href="~/dang-ky">Đăng Ký</a>
+									<a href="~/dang-nhap">Đăng Nhập</a>
+								}
+								else
+								{
+									//<p>@Model.FullName</p>
+									<a href="~/dang-xuat">Đăng xuất</a>
+								}
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 col-md-3">
+					<div class="header__logo">
+						<a href="~/">
+							<img src="~/Public/images/anh/LOGO.jpg" width="700px" height=" 200px" />
+						</a>
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-6">
+					@Html.Action("MainMenu", "Module")
+				</div>
+				<div class="col-lg-3 col-md-3">
+					<div class="header__nav__option">
+						@{
+							int soluong = 0;
+
+							if (Session["giohang"] != null)
+							{
+								List<CartItem> giohang = Session["giohang"] as List<CartItem>;
+
+								soluong = giohang.Count();
+							}
+						}
+
+						<a href="#" class="search-switch"><img src="/Public/icon/search.png" alt=""></a>
+						<a href="#"><img src="/Public/icon/heart.png" alt=""></a>
+						<a href="~/gio-hang" style="text-decoration: none">
+							<img src="~/Public/icon/cart1.png" width="30px" height="30px" />
+							<sup class="translate-middle badge rounded-pill bg-danger  ">@soluong</sup>
+						</a>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!-- Header Section End
+
+		{
+
+						}
+		-->
+
+
+	@RenderBody()
+
+<marquee id="marq" scrollamount="5" direction="right" loop="10" scrolldelay="-100">
+    <a href="Link"><img src="~/Public/images/anh/ht.jpg" width="600" height="300" /> </a>
+    <a href="Link"><img src="~/Public/images/a1.jpg" width="600" height="300" /> </a>
+    <a href="Link"><img src="~/Public/images/8.-4Men-Shop-Cần-Thơ-min-768x432.jpg" width="600" height="300" /> </a>
+
+</marquee>
+
+	<!-- Footer Section Begin -->
+	<footer class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 col-md-6 col-sm-6">
+					<div class="footer__about">
+						<div class="footer__logo">
+                            <a href="#">
+                                <img src="~/Public/images/anh/LOGO.jpg" width="600px" height="200px" />
+                            </a>
+						</div>
+						<p>
+							IU chuyên bán quần áo giới trẻ online với hàng ngàn mẫu mã mới.
+							Hãy đặt hàng online để được hưởng nhiều ưu đãi hơn cửa hàng.
+							Chọn mua ngay các mẫu áo quần mới nhất 2022, hàng đẹp giá cực tốt.
+						</p>
+						<a href="#"><img src="/Public/payment.png" alt=""></a>
+					</div>
+				</div>
+				<div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
+					<div class="footer__widget">
+						@Html.Action("MenuFooter", "Module")
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-3 col-sm-6">
+					<div class="footer__widget text-white">
+						<h6>LIÊN HỆ</h6>
+
+						<p>Địa chỉ: Nguyễn Văn Cừ, Cần Thơ</p>
+						<p>
+							Liên hệ: 0909099900
+						</p>
+						<p>Email hỗ trợ: hotro247@gmail.com</p>
+
+					</div>
+				</div>
+				<div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
+					<div class="footer__widget">
+						<h6>Đăng ký nhận khuyến mãi</h6>
+						<div class="footer__newslatter">
+							<p>
+								Hãy là người đầu tiên nhận khuyến mãi lớn!
+							</p>
+							<form action="#">
+								<input type="text" placeholder="Your email">
+								<button type="submit"><span class="icon_mail_alt"></span></button>
+							</form>
+							<br />
+							<img src="~/Public/images/payment.png" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- Footer Section End -->
+	<!-- Search Begin -->
+	<div class="search-model">
+		<div class="h-100 d-flex align-items-center justify-content-center">
+			<div class="search-close-switch">+</div>
+			<form class="search-model-form">
+				<input type="text" id="search-input" placeholder="Search here.....">
+			</form>
+		</div>
+	</div>
+	<!-- Search End -->
+
+	@RenderSection("footer", required: false)
+	<!-- Js Plugins -->
+	<script src="/Public/js/jquery-3.3.1.min.js"></script>
+	<script src="/Public/js/bootstrap.min.js"></script>
+	<script src="/Public/js/jquery.nice-select.min.js"></script>
+	<script src="/Public/js/jquery.nicescroll.min.js"></script>
+	<script src="/Public/js/jquery.magnific-popup.min.js"></script>
+	<script src="/Public/js/jquery.countdown.min.js"></script>
+	<script src="/Public/js/jquery.slicknav.js"></script>
+	<script src="/Public/js/mixitup.min.js"></script>
+	<script src="/Public/js/main.js"></script>
+	<script src="/Public/js/owl.carousel.min.js"></script>
+	<script src="~/Public/js/site.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+	<script src="~/Public/js/ckeditor/ckeditor.js"></script>
+</body>
+
+</html>

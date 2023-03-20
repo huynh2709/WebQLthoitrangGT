@@ -1,0 +1,10 @@
+﻿@model IEnumerable<MyClass.Models.Menu>
+<nav class="header__menu mobile-menu">
+	<ul>
+		@foreach (var menu in Model)
+		{
+			@Html.Action("MainMenuSub", "Module", new {@id = menu.Id})
+		}
+		
+	</ul>
+</nav>

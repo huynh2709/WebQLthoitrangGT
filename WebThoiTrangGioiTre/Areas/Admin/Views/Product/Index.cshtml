@@ -1,0 +1,137 @@
+﻿@model IEnumerable<MyClass.Models.Product>
+
+@{
+	ViewBag.Title = "Quản lý sản phẩm";
+	Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" id="layoutSidenav_content">
+	<!-- Main content -->
+	<section class="content my-2">
+
+		<!-- Default box -->
+		<div class="card">
+			<div class="card-header">
+				<div class="row">
+					<div class="col-md-6">
+						<strong class="text-danger">QUẢN LÝ SẢN PHẨM</strong>
+					</div>
+					<div class="col-md-6 text-right">
+						<a href="@Url.Action("Create","Product")" class="btn btn-sm btn-success"><i class="fas fa-plus"></i>Thêm mới</a>
+						<!--<a href=" Url.Action("Trash","Product")" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i>Thùng rác</a>-->
+					</div>
+				</div>
+			</div>
+			<div class="card-body">
+				@Html.Partial("Message")
+				<table class="table table-bordered table-striped myTable" id="datatablesSimple">
+					<tr>
+						<th class="text-center">ID</th>
+						<th class="text-center">
+							@Html.DisplayNameFor(model => model.Name)
+						</th>
+						<th class="text-center">
+							@Html.DisplayNameFor(model => model.ShortDescription)
+						</th>
+						<!--<th class="text-center">
+		Html.DisplayNameFor(model => model.Description)
+	</th>-->
+						<th class="text-center">
+							@Html.DisplayNameFor(model => model.Price)
+						</th>
+						<th class="text-center">
+							Khuyến mãi (%)
+						</th>
+						<th class="text-center+">
+							@Html.DisplayNameFor(model => model.Size)
+						</th>
+						<th class="text-center">
+							@Html.DisplayNameFor(model => model.Color)
+						</th>
+						<th class="text-center">
+							@Html.DisplayNameFor(model => model.TypeProduct)
+						</th>
+						<th class="text-center">
+							@Html.DisplayNameFor(model => model.Amount)
+						</th>
+						<th class="text-center">
+							@Html.DisplayNameFor(model => model.Image)
+						</th>
+						<th class="text-center">
+							Danh mục
+						</th>
+						<th class="text-center">
+							Ngày tạo
+						</th>
+						<th class="text-center">
+							Ngày cập nhật
+						</th>
+
+						<th class="text-center" style="width: 150px">Chức năng</th>
+					</tr>
+
+					@foreach (var item in Model)
+					{
+				<tr>
+					<td>@item.Id</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Name)
+					</td>
+					<td>
+						@Html.Raw(item.ShortDescription)
+					</td>
+					<!--<td>
+		Html.Raw(item.Description)
+	</td>-->
+
+					<td>
+						@Html.DisplayFor(modelItem => item.Price)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Sale)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Size)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Color)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.TypeProduct)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Amount)
+					</td>
+					<td>
+						<img src="~/Public/images/products/@item.Image" alt="TenHinh" class="img-fluid" />
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.IdCategory)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.CreatedAt)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.UpdatedAt)
+					</td>
+
+					<td>
+						<a href="@Url.Action("Details","Product", new { id = item.Id })" class="btn btn-sm btn-primary"><i class="fas fa-eye"></i></a>
+						<a href="@Url.Action("Edit","Product", new { id = item.Id })" class="btn btn-sm btn-info"><i class="fas fa-edit"></i></a>
+						<a href="@Url.Action("Delete","Product", new { id = item.Id })" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+					</td>
+				</tr>
+					}
+
+				</table>
+			</div>
+		</div>
+		<!-- /.card -->
+
+	</section>
+	<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->

@@ -1,0 +1,70 @@
+﻿@model MyClass.Models.News
+
+@{
+	ViewBag.Title = "Chi tiết trang mẫu tin";
+	Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+	<!-- Main content -->
+	<section class="content my-2">
+
+		<!-- Default box -->
+		<div class="card">
+			<div class="card-header">
+				<div class="row">
+					<div class="col-md-6">
+						<strong class="text-danger">CHI TIẾT DANH MỤC SẢN PHẨM SẼ XÓA</strong>
+					</div>
+					<div class="col-md-6 text-right">
+						@using (Html.BeginForm())
+						{
+							@Html.AntiForgeryToken()
+
+							<div class="form-actions no-color">
+								<button class="btn btn-sm btn-outline-warning" type="submit" name="delete"><i class="fas fa-trash"></i>Xóa</button>
+								<a href="@Url.Action("Index","Page")" class="btn btn-sm btn-outline-info"><i class="fas fa-long-arrow-alt-left"></i>  Về danh sách</a>
+							</div>
+						}
+					</div>
+				</div>
+			</div>
+			<div class="card-body ">
+				<table class="table table-bordered">
+					<tr>
+						<th style="width:180px" class="bg-dark"><p>Tên trường</p></th>
+						<th class="bg-dark">Nội dung</th>
+					</tr>
+					
+					<tr>
+						<td class="bg-light"> @Html.DisplayNameFor(model => model.Content)</td>
+						<td class="bg-light">
+							@Html.DisplayFor(model => model.Content)
+						</td>
+					</tr>
+					<tr>
+						<td>@Html.DisplayNameFor(model => model.Image) </td>
+						<td> @Html.DisplayFor(model => model.Image)</td>
+					</tr>
+					<tr>
+						<td class="bg-light">@Html.DisplayNameFor(model => model.NameNewsCategory)</td>
+						<td class="bg-light">@Html.DisplayFor(model => model.NameNewsCategory)</td>
+					</tr>
+					<tr>
+						<td> @Html.DisplayNameFor(model => model.CreatedAt)</td>
+						<td>@Html.DisplayFor(model => model.CreatedAt)</td>
+					</tr>
+					<tr>
+						<td class="bg-light"> @Html.DisplayNameFor(model => model.UpdatedAt)</td>
+						<td class="bg-light"> @Html.DisplayFor(model => model.UpdatedAt)</td>
+					</tr>
+					
+				</table>
+			</div>
+		</div>
+		<!-- /.card -->
+	</section>
+	<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->

@@ -1,0 +1,70 @@
+﻿@model IEnumerable<MyClass.Models.News>
+
+@{
+	var newsCategory = ViewBag.newsCategory;   
+}
+
+@{
+	ViewBag.Title = "newsCategory.Name";
+	Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+<br />
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-option">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="breadcrumb__text">
+					<h4 class="text-uppercase">@newsCategory.Name</h4>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- Breadcrumb Section End -->
+<!-- Shop Section Begin -->
+<section class="shop spad">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-3">
+				<div class="shop__sidebar">
+					<div class="shop__sidebar__search">
+						<form action="#">
+							<input type="text" placeholder="Search...">
+							<button type="submit"><span class="icon_search"></span></button>
+						</form>
+					</div>
+					<div class="shop__sidebar__accordion">
+						<div class="accordion" id="accordionExample">
+							@Html.Action("ListCategory", "Module")
+							@Html.Action("ListNews", "Module")
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-9">
+					<div class="row">
+						@foreach (var news in Model)
+						{
+						<div class="col-lg-4 col-md-6 col-sm-6">
+							<div class="blog__item">
+								<div class="blog__item__pic set-bg" data-setbg="">
+									<img src="~/Public/images/blog/@news.Image" />
+								</div>
+
+								<div class="blog__item__text">
+									<span><img src="img/icon/calendar.png" alt="">@news.CreatedAt</span>
+									<h5>@news.Name</h5>
+									<a href="@Url.Action("NDetail","Home", new { Id = news.Id })">Read More</a>
+								</div>
+							</div>
+						</div>
+						}
+					</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- Shop Section End -->
